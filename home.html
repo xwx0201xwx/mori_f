@@ -1,5 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    function scroll_fadein(){
+        jQuery('.scroll_up,.scroll_up-sp,.scroll_up-pc').each(function(){
+            var elemPos = jQuery(this).offset().top;
+            var scroll = jQuery(window).scrollTop();
+            var windowHeight = jQuery(window).height();
+            if (scroll > elemPos - windowHeight + 100){
+                jQuery(this).addClass('on');
+            }
+        });
+    }
+    jQuery(function(){
+        jQuery(window).scroll(function (){
+            scroll_fadein();
+        });
+        scroll_fadein();
+    });
+</script>  
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,27 +36,119 @@
 
         /* 動画のスタイル */
         .background-video {
-            position: absolute; /* 画面全体に配置 */
+            position: relative;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* 動画を画面全体に広げる */
-            z-index: -1; /* 他の要素よりも後ろに配置 */
+            height: 100vh;
+            height: calc(var(--vh, 1vh)* 100);
+            /* background: url(../images/mv_bg.jpg) no-repeat; */
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            z-index: -1;
+            /* 他の要素よりも後ろに配置 */
         }
 
         /* その他のコンテンツ */
         .content {
             position: relative;
-            z-index: 1; /* コンテンツを動画の上に表示 */
+            z-index: 1;
+            /* コンテンツを動画の上に表示 */
             text-align: center;
-            color: white; /* 文字色を白に設定 */
+            color: white;
+            /* 文字色を白に設定 */
             padding-top: 20%;
+        }
+
+        /* 文字ふわぁ部分のCSS */
+        .bg_lgray {
+            background: #e9ebeb;
+        }
+
+        .pdBox_1 {
+            padding: 7em 0 5em;
+        }
+
+        .container650 {
+            width: 70%;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* 文字の向き(縦文字) */
+        .vertical {
+            writing-mode: vertical-rl;
+        }
+
+        .flex,
+        .flex_pc,
+        .flex_all,
+        .flex_pcpro {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fd-column {
+            flex-direction: column;
+        }
+
+        /* 文字を上にスクロール */
+        .scroll_up {
+            transition: 1.5s ease-in-out;
+            transition-behavior: normal;
+            transition-duration: 1.5s;
+            transition-timing-function: ease-in-out;
+            transition-delay: 0s;
+            transition-property: all;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        /* 文字サイズ1 */
+        .fz40 {
+            font-size: 40px;
+        }
+
+        /* nikiから持ってきたやつ */
+        .ls025 {
+            letter-spacing: 0.25em;
+        }
+
+        .pd0 {
+            padding: 0;
+        }
+
+        .sp-mg {
+            padding: 5vw 0;
+        }
+
+        .fz17 {
+            font-size: 30px;
+        }
+
+        .ls015 {
+            letter-spacing: 0.15em;
+        }
+
+        /*----------------------------
+        scroll_up ｜下から上へ出現
+        ----------------------------*/
+        .scroll_up {
+            transition: 1.5s ease-in-out;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        .scroll_up.on {
+            transform: translateY(0);
+            opacity: 1.0;
         }
     </style>
 </head>
+
 <body>
-    
+
     <!-- mp4 
     <video class="background-video" autoplay muted loop>
         <source src="background-video.mp4" type="video/mp4">
@@ -43,158 +157,91 @@
     -->
 
     <!-- youtube -->
-    <iframe class="background-video" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=JdKPItVXTQA"
-        frameborder="0" 
+     <!--
+    <iframe class="background-video"
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=k1cMlw9rjkQ&controls=0&modestbranding=1&rel=0&showinfo=0" 
+        frameborder="0"
         allow="autoplay; encrypted-media" 
         allowfullscreen>
     </iframe>
+    -->
 
-<!-- ヘッダーセクション -->
-<header>
-    <div class="header-content">
-        <h1>未来を飛ぼう</h1>
-        <p>最先端のドローンで空を自由に飛び回ろう。</p>
-        <button class="cta-button">今すぐ購入</button>
-    </div>
-</header>
 
-<!-- 製品紹介セクション -->
-<section class="product-section">
-    <div class="product-card">
-        <img src="drone1.jpg" alt="ドローン1">
-        <h3>DJI Mavic Pro</h3>
-        <p>4Kカメラ搭載、コンパクトで持ち運び簡単</p>
-        <a href="#" class="btn">詳細</a>
-    </div>
-    <div class="product-card">
-        <img src="drone2.jpg" alt="ドローン2">
-        <h3>Phantom 4</h3>
-        <p>安定した飛行性能、プロフェッショナル向け</p>
-        <a href="#" class="btn">詳細</a>
-    </div>
-    <div class="product-card">
-        <img src="drone3.jpg" alt="ドローン3">
-        <h3>DJI Air 2S</h3>
-        <p>強力なAI機能、優れた飛行距離</p>
-        <a href="#" class="btn">詳細</a>
-    </div>
-</section>
+    <video width="600" autoplay>
+        <source src="video.mp4" type="video/mp4">
+        お使いのブラウザは動画タグをサポートしていません。
+    </video>
 
-<!-- フッターセクション -->
-<footer>
-    <p>&copy; 2024 ドローンショップ - All Rights Reserved.</p>
-</footer>
+    <!-- 文字ふわぁ -->
+    <section class="bg_lgray pdBox_1">
+        <div class="container650 flex fd-column scroll_up">
+            <div>
+                <h2><span class="fz40 ls025">
+                    360°広がる感動。<br>
+                    ドローンで描く、新しい世界。
+                </span></h2>
+            </div>
+            <p class="pd0 sp-mg fz17 ls015">
+                プロフェッショナルなドローン映像と撮影サービスで<br>
+                思い出やビジネスの価値をアップグレードします。</p>
+        </div>
+    </section>
+
+    <!-- ヘッダーセクション -->
+
+    <!-- フッターセクション -->
+    <footer>
+        <p>&copy; 2024 ドローンショップ - All Rights Reserved.</p>
+    </footer>
 
 </body>
+
 </html>
 <style type="text/css">
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
 
-header {
-    background-image: url('drone-background.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-}
+    /* 製品紹介セクション */
+    /* styles.css */
+    .animated-text {
+        position: absolute;
+        bottom: 20px;
+        /* 動画の下から20pxの位置に文字を配置 */
+        left: 50%;
+        /* 水平方向に中央揃え */
+        transform: translateX(-50%);
+        /* 文字を中央に調整 */
+        font-size: 24px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* 文字の周りに影をつけて見やすくする */
+        background-color: rgba(0, 0, 0, 0.5);
+        /* 背景に半透明の黒を追加 */
+        padding: 10px;
+        animation: slideIn 2s ease-out;
+    }
 
-.header-content {
-    max-width: 600px;
-}
+    @keyframes slideIn {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
 
-h1 {
-    font-size: 4em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
 
-p {
-    font-size: 1.2em;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.cta-button {
-    padding: 15px 30px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: #0077cc;
-}
-
-/* 製品紹介セクション */
-.product-section {
-    display: flex;
-    justify-content: space-around;
-    padding: 50px;
-    background-color: #ffffff;
-    gap: 30px;
-}
-
-.product-card {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.product-card h3 {
-    font-size: 1.5em;
-    margin: 10px 0;
-}
-
-.product-card p {
-    font-size: 1em;
-    color: #555;
-}
-
-.btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #00aaff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #0077cc;
-}
-
-/* フッター */
-footer {
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-}
+    /* フッター */
+    footer {
+        text-align: center;
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+    }
 </style>
