@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html lang="ja"><head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script>
-    function scroll_fadein(){
-        jQuery('.scroll_up,.scroll_up-sp,.scroll_up-pc').each(function(){
-            var elemPos = jQuery(this).offset().top;
-            var scroll = jQuery(window).scrollTop();
-            var windowHeight = jQuery(window).height();
-            if (scroll > elemPos - windowHeight + 100){
-                jQuery(this).addClass('on');
-            }
-        });
-    }
-    jQuery(function(){
-        jQuery(window).scroll(function (){
+    <script>
+        function scroll_fadein(){
+            jQuery('.scroll_up,.scroll_up-sp,.scroll_up-pc').each(function(){
+                var elemPos = jQuery(this).offset().top;
+                var scroll = jQuery(window).scrollTop();
+                var windowHeight = jQuery(window).height();
+                if (scroll > elemPos - windowHeight + 100){
+                    jQuery(this).addClass('on');
+                }
+            });
+        }
+        jQuery(function(){
+            jQuery(window).scroll(function (){
+                scroll_fadein();
+            });
             scroll_fadein();
         });
-        scroll_fadein();
-    });
-</script>  
-
-<head>
+    </script>  
     <style>
         /* 背景動画を設定 */
         body, html {
@@ -177,7 +172,7 @@
     
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ドローンショップ</title>
+        <title>ドローンキャット</title>
         <link rel="stylesheet" href="style.css">
     </head>
     
